@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="icon" href="../static/FN_Logo.jpg" type="image/x-icon">
+    <title>Rate FingerNotes</title>
+</head>
+<body>
+    <div class="container">
+        <img src="../static/FN_Logo.jpg" alt="Finger notes logo" class="logo">
+        {% if message %}
+        <p class="message">{{ message | safe }}</p>
+        {% endif %}
+        <form action="/submit" method="post">
+            <div class="form-group">
+                <h3>School name</h3>
+                <input type="text" name="schools" placeholder="Name of School">
+            </div>
+            <div class="form-group">
+                <h3>Categories</h3>
+                <select name="categories">
+                    <option value="" selected>Select Category</option>
+                    <option value="Customer Service">Customer Service</option>
+                    <option value="Software functionality">Software functionality</option>
+                    <option value="Software Maintenance">Software Maintenance</option>
+                    <option value="Pricing">Pricing</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <h3>Rate your category</h3>
+                <input type="radio" name="rating" value="1"> 1
+                <input type="radio" name="rating" value="2"> 2
+                <input type="radio" name="rating" value="3"> 3
+                <input type="radio" name="rating" value="4"> 4
+                <input type="radio" name="rating" value="5"> 5
+                <input type="radio" name="rating" value="6"> 6
+                <input type="radio" name="rating" value="7"> 7
+                <input type="radio" name="rating" value="8"> 8
+                <input type="radio" name="rating" value="9"> 9
+                <input type="radio" name="rating" value="10" checked> 10
+            </div>
+            <div class="form-group">
+                <h3>Leave Comments</h3>
+                <textarea name="comments" id="" cols="30" rows="7" placeholder="Tell us all about your experience."></textarea>
+            </div>
+            <input type="submit" value="Submit" class="btn">
+        </form>
+        <br>
+        <h2>Feedbacks</h2>
+        <hr> 
+        <ul>
+            {% for feedback in feedbacks %}<br>
+            <li>
+                <h3>{{ feedback.school }} - {{ feedback.rating }} Star Rating</h3>
+                <h4>Feedback Category: {{ feedback.category }}</h4>
+                <p>{{ feedback.comments }}</p>
+            </li><br><hr>
+            {% endfor %}
+        </ul> 
+    </div>
+</body>
+</html>
